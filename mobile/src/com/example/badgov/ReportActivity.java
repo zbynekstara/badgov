@@ -21,6 +21,12 @@ import android.provider.Settings;
 import android.text.format.Time;
 import android.util.Log;
 import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class ReportActivity extends Activity implements LocationListener{
@@ -41,11 +47,23 @@ public class ReportActivity extends Activity implements LocationListener{
 	
 	String address;
 	
+	EditText review, where;
+	TextView location, date;
+	ImageView tumbnail;
+	Button submit;
+	
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.report);
+		
+		review = (EditText) findViewById(R.id.reviewTxt);
+		where = (EditText) findViewById(R.id.whereEditTxt);
+		location = (TextView) findViewById(R.id.locationTxtView);
+		date = (TextView) findViewById(R.id.dateTextView);
+				
 		Time today = new Time(Time.getCurrentTimezone());
 		today.setToNow();
 		int mon = today.month;
@@ -53,6 +71,10 @@ public class ReportActivity extends Activity implements LocationListener{
 		Date = Integer.toString(today.monthDay) + "-" + Integer.toString( mon) + "-" + Integer.toString(today.year);
 		time = today.format("%H") + " : " + today.format("%M") + " : " + today.format("%S");
 		Date_Time = time + " | " + Date;
+		date.setText(Date_Time);
+		
+		submit = (Button) findViewById(R.id.submitBtn);
+
 		loc_mgr = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 		
 		Location location = loc_mgr.getLastKnownLocation(LocationManager.GPS_PROVIDER);
@@ -64,6 +86,16 @@ public class ReportActivity extends Activity implements LocationListener{
         else {
             loc_mgr.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
         }
+		
+		submit.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+
+				Intent x = new Intent(ReportActivity.this,BrowseActivity.class);
+		        startActivity(x);
+			}
+		});
 		
 	}
 	
