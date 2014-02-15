@@ -4,7 +4,14 @@ class TestDataController extends BaseController {
 
   public function getTestData()
   {
-    return Response::json(array('hello' => 'world', 'nested' => array('this' => array('is', 'a', 'nested', 'array'))));
+    return Response::json(array('tweets' => array(
+        array('profile' => 'https://abs.twimg.com/sticky/default_profile_images/default_profile_2_bigger.png',
+          'tweet' => 'this is test data'),
+        array('profile' => 'https://abs.twimg.com/sticky/default_profile_images/default_profile_2_bigger.png',
+          'tweet' => 'this is more test data'),
+        array('profile' => 'https://abs.twimg.com/sticky/default_profile_images/default_profile_2_bigger.png',
+          'tweet' => 'woooooooo shoftak')
+      )));
   }
 
   public function getTwitterTest()
