@@ -11,7 +11,7 @@ class TestDataController extends BaseController {
           'tweet' => 'this is more test data'),
         array('profile' => 'https://abs.twimg.com/sticky/default_profile_images/default_profile_2_bigger.png',
           'tweet' => 'woooooooo shoftak')
-      )));
+      ), 'count' => 1020));
   }
 
   public function getTwitterTest()
