@@ -40,3 +40,4 @@ Route::get('/', function()
 
 Route::get('/test_json', 'TestDataController@getTestData');
 
+Route::get('/test_twitter', 'TestDataController@getTwitterTest');
