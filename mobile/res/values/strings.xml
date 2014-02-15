@@ -4,5 +4,7 @@
     <string name="app_name">BadGov</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="SnapShot">Snap</string>
+    <string name="Snap">Snap it !!</string>
 
 </resources>
