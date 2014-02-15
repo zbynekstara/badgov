@@ -7,4 +7,21 @@ class TestDataController extends BaseController {
     return Response::json(array('hello' => 'world', 'nested' => array('this' => array('is', 'a', 'nested', 'array'))));
   }
 
+  public function getTwitterTest()
+  {
+    $settings = array(
+      'oauth_access_token' => "jftihe71X1Ls4uveYEiLpEFxTHidCJh1n3QhXl1",
+      'oauth_access_token_secret' => "rWFgwYIJQS4cxvICKvcSEovMw3pqIyePuIwRIlZ493eaI",
+      'consumer_key' => "aSvTZCvgSNfa6kkj41RHQ",
+      'consumer_secret' => "JUBsyweHzviiVy6TirESrMgov9I0qeNYBQPLWf5mRQ"
+    );
+
+    $url = 'https://api.twitter.com/1.1/statuses/update.json';
+    $postfields = array('status' => 'test post');
+    
+    $twitter = new TwitterAPIExchange();
+
+    return Response::json(array('test' => 'twitter'));
+  }
+
 }
