@@ -5,21 +5,11 @@
 
     <ImageView
         android:id="@+id/imageView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_marginRight="32dp"
-        android:src="@drawable/ic_launcher" />
-
-    <TextView
-        android:id="@+id/reviewTxt"
-        android:layout_width="188dp"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/dateTextView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:hint="Add a comment .." />
+        android:src="@drawable/ic_action_camera" />
 
     <EditText
         android:id="@+id/whereEditTxt"
@@ -40,19 +30,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/whereEditTxt"
+        android:layout_margin="10dp"
         android:layout_marginTop="15dp"
         android:text="Location"
         android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <TextView
-        android:id="@+id/dateTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/imageView1"
-        android:layout_below="@+id/imageView1"
-        android:layout_marginTop="23dp"
-        android:text="Date"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <RadioGroup
         android:id="@+id/category"
@@ -83,6 +64,31 @@
         android:layout_below="@+id/category"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="53dp"
-        android:text="Submit" />
+        android:background="@color/btnColor"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:text="Submit"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/dateTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/imageView1"
+        android:layout_below="@+id/imageView1"
+        android:layout_marginTop="44dp"
+        android:text="Date"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <EditText
+        android:id="@+id/editText1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/dateTextView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:ems="10"
+        android:inputType="textMultiLine" />
 
 </RelativeLayout>
