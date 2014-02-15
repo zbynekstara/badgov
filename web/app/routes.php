@@ -11,9 +11,33 @@
 |
 */
 
+
+Route::get('/', array(
+	"as" => "home",
+	"uses" => "HomeController@getHomePage"	
+));
+
+
+Route::get("/submit", array(
+	"as" => "report-submit",
+	"uses" => "ReportController@getNewReportPage"	
+));
+
+Route::post("/submit", array(
+	"as" => "report-submit-post",
+	"uses" => "ReportController@postReport"	
+));
+
+Route::get("/image", array(
+	"as" => "report-image",
+	"uses" => "ReportController@showImage"	
+));
+
 Route::get('/', function()
 {
 	return View::make('hello');
 });
 
 Route::get('/test_json', 'TestDataController@getTestData');
+
+Route::get('/test_twitter', 'TestDataController@getTwitterTest');
