@@ -48,13 +48,16 @@ class ReportController extends BaseController {
 		    "Location_id" => $location->id
 	    ));
 		
-		$this->postToTwitter();
+		$this->postToTwitter(URL::route("report-details", array(
+				"id" => $report->id;
+			)
+		));
 		
 		
 		
 	}
 	
-	public function postToTwitter() {
+	public function postToTwitter($url) {
 		$settings = array(
 			'oauth_access_token' => "2344979191-jftihe71X1Ls4uveYEiLpEFxTHidCJh1n3QhXl1",
       		'oauth_access_token_secret' => "rWFgwYIJQS4cxvICKvcSEovMw3pqIyePuIwRIlZ493eaI",
@@ -65,7 +68,7 @@ class ReportController extends BaseController {
     	$url = 'https://api.twitter.com/1.1/statuses/update.json';
     	$requestMethod = 'POST';
     	$postfields = array(
-    		'status' => $this->tweet("Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", "https://www.google.ae/?gws_rd=cr&ei=JJT_UpDzKZT20gWc14DYBw#q=nyuad")
+    		'status' => $this->tweet(Input::get("report_Desc"), $url)
     	);
     
     	$twitter = new TwitterAPIExchange($settings);
