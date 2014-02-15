@@ -17,9 +17,14 @@ class TestDataController extends BaseController {
     );
 
     $url = 'https://api.twitter.com/1.1/statuses/update.json';
+    $requestMethod = 'POST';
     $postfields = array('status' => 'test post');
     
-    $twitter = new TwitterAPIExchange();
+    $twitter = new TwitterAPIExchange($settings);
+
+	echo $twitter->buildOauth($url, $requestMethod)
+             ->setPostfields($postfields)
+             ->performRequest();
 
     return Response::json(array('test' => 'twitter'));
   }
