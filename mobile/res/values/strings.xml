@@ -7,5 +7,12 @@
     <string name="SnapShot">Snap</string>
     <string name="Snap">Snap it !!</string>
     <string name="logo">Shoftak!</string>
+    
+    <string-array name="tweets">
+        <item > tweet1 </item>
+        <item > tweet2 </item>
+        <item > tweet3 </item>
+        
+    </string-array>
 
 </resources>
