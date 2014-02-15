@@ -83,10 +83,7 @@ class getLocation extends AsyncTask<Void, Void, Boolean> {
 		@Override
 	    protected void onPreExecute()
 	    {
-
 			
-			//progressDialog= ProgressDialog.show(ReportActivity.this, "Loading...","Checking", true);
-		//	progressDialog.show();
 	    }
 		
 	    @Override
