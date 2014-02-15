@@ -85,7 +85,7 @@ class ReportController extends BaseController {
     	$url = 'https://api.twitter.com/1.1/statuses/update.json';
     	$requestMethod = 'POST';
     	$postfields = array(
-    		'status' => $this->tweet(Input::get("report_Desc"), $url)
+    		'status' => $this->tweet(Input::get("report_type"), Input::get("loc_location"))
     	);
     
     	$twitter = new TwitterAPIExchange($settings);
@@ -97,16 +97,28 @@ class ReportController extends BaseController {
         return Response::json(array('test' => 'twitter'));
 	}
 	
-	public function tweet($input, $link) {
+	public function tweet($type, $location) {
+		$input = "";
+		if ($type == 1) { // bad service
+			$input = "Bad service";
+		} else { // corruption
+			$input = "Corruption";
+		}
+		$input .= " at ";
+		$input .= $location;
 		$tweetText = $this->shorten($input);
-		$tweetText .= " " . $link;
 		return $tweetText;
 	}
 	
 	public function shorten($originalString) {
-		// length is 140-22-3-1-1 = 113
-		$newString = substr($originalString, 0, 113);
-		$newString .= "...";
+		// length must be below 140-3-1 = 136
+		$newString = "";
+		if (strlen($originalString) > 139) {
+			$newString = substr($originalString, 0, 136);
+			$newString .= "...";
+		else {
+			$newString = $originalString;
+		}
 		return $newString;
 	}
 }
