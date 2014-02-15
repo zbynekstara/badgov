@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">BadGov</string>
+    <string name="app_name">Shoftak</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="SnapShot">Snap</string>
+    <string name="Snap">Snap it !!</string>
+    <string name="logo">Shoftak!</string>
 
 </resources>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="32dp"
+        android:src="@drawable/ic_launcher" />
+
+    <TextView
+        android:id="@+id/reviewTxt"
+        android:layout_width="188dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/dateTextView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:hint="Add a comment .." />
+
+    <EditText
+        android:id="@+id/whereEditTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/imageView1"
+        android:layout_marginTop="75dp"
+        android:ems="10"
+        android:hint="Where?" >
+
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:id="@+id/locationTxtView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/whereEditTxt"
+        android:layout_marginTop="15dp"
+        android:text="Location"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/dateTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/imageView1"
+        android:layout_below="@+id/imageView1"
+        android:layout_marginTop="23dp"
+        android:text="Date"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <RadioGroup
+        android:id="@+id/category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/locationTxtView"
+        android:layout_marginTop="20dp" >
+
+        <RadioButton
+            android:id="@+id/badServiceRadio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="Bad Service" />
+
+        <RadioButton
+            android:id="@+id/corruptionServiceRadio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Corruption" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/submitBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/category"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="53dp"
+        android:text="Submit" />
+
+</RelativeLayout>

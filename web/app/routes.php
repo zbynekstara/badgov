@@ -11,6 +11,7 @@
 |
 */
 
+
 Route::get('/', array(
 	"as" => "home",
 	"uses" => "HomeController@getHomePage"	
@@ -31,3 +32,11 @@ Route::get("/image", array(
 	"as" => "report-image",
 	"uses" => "ReportController@showImage"	
 ));
+
+Route::get('/', function()
+{
+	return View::make('hello');
+});
+
+Route::get('/test_json', 'TestDataController@getTestData');
+
