@@ -28,7 +28,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	public static int count=0;
 	Button skip;
 	private Bitmap bitmap;
-	String file;
+	public static String file;
 	ProgressDialog progressDialog;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -80,12 +80,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
 	    Log.i("Image", String.valueOf(data_image));
 	    */
 	    
-	    
-	    
 	    Intent x = new Intent(MainActivity.this,ReportActivity.class);
         startActivity(x);
-        
-        
         
 	    if (requestCode == TAKE_PHOTO_CODE && resultCode == RESULT_OK) {
 	        Log.d("CameraDemo", "Pic saved");
