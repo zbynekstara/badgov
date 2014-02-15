@@ -48,7 +48,7 @@ class ReportController extends BaseController {
 		    "Location_id" => $location->id
 	    ));
 		
-		postToTwitter();
+		$this->postToTwitter();
 		
 		
 		
@@ -65,10 +65,7 @@ class ReportController extends BaseController {
     	$url = 'https://api.twitter.com/1.1/statuses/update.json';
     	$requestMethod = 'POST';
     	$postfields = array(
-    		'status' => tweet(
-    			Input::get("report_Desc"),
-    			"www.website.example"
-    		)
+    		'status' => $this->tweet("Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", "https://www.google.ae/?gws_rd=cr&ei=JJT_UpDzKZT20gWc14DYBw#q=nyuad")
     	);
     
     	$twitter = new TwitterAPIExchange($settings);
@@ -76,15 +73,19 @@ class ReportController extends BaseController {
 		echo $twitter->buildOauth($url, $requestMethod)
              ->setPostfields($postfields)
              ->performRequest();
+             
+        return Response::json(array('test' => 'twitter'));
 	}
 	
-	public tweet(string $input, string $link) {
-		$tweetText = shorten($input);
-		$tweetText .= " " . $link
+	public function tweet($input, $link) {
+		$tweetText = $this->shorten($input);
+		$tweetText .= " " . $link;
+		return $tweetText;
 	}
 	
-	public shorten(string $originalString, int $newLength=114) {
-		$newString = substring($originalString, 0, $newLength);
+	public function shorten($originalString) {
+		// length is 140-22-3-1-1 = 113
+		$newString = substr($originalString, 0, 113);
 		$newString .= "...";
 		return $newString;
 	}

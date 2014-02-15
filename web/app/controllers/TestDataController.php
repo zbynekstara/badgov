@@ -42,7 +42,8 @@ class TestDataController extends BaseController {
 	}
 	
 	public function shorten($originalString) {
-		$newString = substr($originalString, 0, 110);
+		// length is 140-22-3-1-1 = 113
+		$newString = substr($originalString, 0, 113);
 		$newString .= "...";
 		return $newString;
 	}
