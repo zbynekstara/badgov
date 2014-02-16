@@ -2,6 +2,15 @@
 
 class TestDataController extends BaseController {
 
+	public function getStatistics() {
+		$lastReport = DB::table("reports")
+			->order_by("id", "desc") // optimization needed when database grows large
+			->first()
+		$count = $lastReport->id;
+		
+		return Response::json(array('count' => $count));
+	}
+
   public function getTestData()
   {
     return Response::json(array('tweets' => array(

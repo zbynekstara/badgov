@@ -23,6 +23,16 @@ Route::get("/submit", array(
 	"uses" => "ReportController@getNewReportPage"	
 ));
 
+Route::get("/timeline", function()
+{
+	return View::make('timeline');
+});
+
+Route::get("/statistics", array(
+	"as" => "statistics-request",
+	"uses" => "ReportController@getStatistics"
+));
+
 Route::post("/submit", array(
 	"as" => "report-submit-post",
 	"uses" => "ReportController@postReport"	

@@ -2,6 +2,23 @@
 
 class ReportController extends BaseController {
 
+	public function getStatistics() {
+		$reportCount = DB::table("reports")
+			->count()
+			
+		$lastRecord = DB::table("reports")
+			->order_by("id", "desc")
+			->first()
+
+		$locationCount = DB::table("reports")
+			->where("location", "=", $lastRecord->location_id)
+			->count()
+		
+		return Response::json(array(
+			'reportCount' => $reportCount,
+			'locationCount' => $locationCount
+		));
+	}
 	
 	public function getNewReportPage() {
 		
@@ -85,7 +102,7 @@ class ReportController extends BaseController {
     	$url = 'https://api.twitter.com/1.1/statuses/update.json';
     	$requestMethod = 'POST';
     	$postfields = array(
-    		'status' => $this->tweet(Input::get("report_type"), Input::get("loc_location"))
+    		'status' => $this->tweet(Input::get("report_Desc"), $url)
     	);
     
     	$twitter = new TwitterAPIExchange($settings);
@@ -97,26 +114,19 @@ class ReportController extends BaseController {
         return Response::json(array('test' => 'twitter'));
 	}
 	
-	public function tweet($type, $location) {
-		$input = "";
-		if ($type == 1) { // bad service
-			$input = "Bad service";
-		} else { // corruption
-			$input = "Corruption";
-		}
-		$input .= " at ";
-		$input .= $location;
+	public function tweet($input, $link) {
 		$tweetText = $this->shorten($input);
+		$tweetText .= " " . $link;
 		return $tweetText;
 	}
 	
 	public function shorten($originalString) {
-		// length must be below 140-3-1 = 136
+		// length is 140-22-(3)-1-1 = 113 (116)
 		$newString = "";
-		if (strlen($originalString) > 139) {
-			$newString = substr($originalString, 0, 136);
+		if (strlen($originalString) > 116) {
+			$newString = substr($originalString, 0, 113);
 			$newString .= "...";
-		else {
+		} else {
 			$newString = $originalString;
 		}
 		return $newString;
