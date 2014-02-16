@@ -6,7 +6,7 @@ class FileCustom extends Eloquent {
 	protected $table = "files";
 	
 	//array of fields which can be filled
-	protected $fillable = array("size", "real_name", "uploaded_name", "path", "type", "report_id");
+	protected $fillable = array("path", "report_id");
 	
 	//string cotnains the host id column name (game_id, post_id, ...)
 	protected $host_id_coulmn_name;

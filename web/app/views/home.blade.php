@@ -1,8 +1,25 @@
 @extends("layout.main")
 
+@section("css")
+	<style>
+      #map-canvas {
+        height: 100%;
+		width: 100%;
+        margin: 0px;
+        padding: 0px
+      }
+    </style>
+@stop
+
+@section("js")
+	
+	{{$map}}
+	
+@stop
+
 @section("content")
 	<div class="row">
-		<div class="col-xs-12">
+		<div class="col-xs-7">
 			<div class="panel panel-info">
 				<div class="panel-heading">
 					<h4>Reports</h4>
@@ -39,31 +56,40 @@
 					
 					<section class="list-group reports">
 						
-						@for($i = 0; $i < 5; $i++)
-							<a href="" class="list-group-item">
+						
+							
+						@foreach(Report::all() as $report)
+							<a href="{{URL::route('report-details', array('id' => $report->id))}}" class="list-group-item">
 								<article class="clearfix">
 
 									
 									<figure class="pull-left" style="margin-right: 30px">
-										<img src="http://3.bp.blogspot.com/-SAXKuaWddT8/T7oOJGBi8CI/AAAAAAAAAWc/qSL9GTnlpSM/s1600/BossLecturing.jpg" alt="Image" class="img-rounded" width="120" height="100"/>
+										<img src="{{URL::route('home')}}{{$report->image->path}}" alt="Image" class="img-rounded" width="120" height="100"/>
 									</figure>
 									
 									<div class="reports-body">
 										
 										<header>
-											<h1>Report Header</h1>
+											<h1>{{$report->report_Desc}}</h1>
 										</header>
 										
 										<p class="list-group-item-text">
-											Report Description
+											{{$report->location->location}}
 										</p>
 										
 									</div>
 								</article>
 							</a>
-						@endfor
+						@endforeach
 					</section>
 				</div>
+			</div>
+		</div>
+		
+		
+		<div class="col-xs-5">
+			<div id="map-canvas">
+				
 			</div>
 		</div>
 		

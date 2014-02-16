@@ -11,8 +11,13 @@
 		<input type="text" name="loc_latitude" placeholder="loc_latitude"/>loc_location
 		<input type="text" name="loc_location" placeholder="loc_location"/>
 		<input type="text" name="Date_Time" placeholder="Date Time"/>
-		<input type="file" name="Photo" />
+		<br />
+		
 		<br />
 		<input type="submit" value="Report" />
+	</form>
+	<form method="post" action="{{URL::route('report-submit-photo-post')}}" enctype="multipart/form-data">
+	<input type="file" name="file_image" />
+	<input type="submit" value="upload" />
 	</form>
 @stop

@@ -1,7 +1,7 @@
 <?php
 
 class ReportController extends BaseController {
-
+	
 	
 	public function getNewReportPage() {
 		
@@ -9,34 +9,41 @@ class ReportController extends BaseController {
 		
 	}
 	
-	public function showImage() {
-		$report = DB::table("reports")->where("ID", "=", 5)->first();
+	public function getReport($report_id) {
+		$report = Report::find($report_id);
 		
-		$image = $report->Photo;
-
-		return View::make("report.image", array(
-			"img" => base64_encode($image)
-		));
+		if ($report) {
+			return View::make("report.details", array(
+				"report" => $report
+			));
+		}
+		
+		return "This report doesn't exist";
 	}
 	
-	
-	
-	public function postReport()
-	{
+	public function postReportPhoto() {
+		//$relative_path = "/uploads/" . $_FILES['file_image']['name'];
 		
 		
-		$relative_path = "/public/uploads/" . $_FILES['file_image']['name'];
 		
-		$full_path = base_path() . $relative_path;
+		$full_path = base_path() . "/public" . FileCustom::orderBy('id', 'desc')->first()->path;
 		
 		move_uploaded_file($_FILES['file_image']['tmp_name'], $full_path);
 		
+	}
+	
+	public function postReport()
+	{
 		
 		$location = Location::create(array(
 		    'locX' => Input::get("loc_longitude"),
 		    "locY" => Input::get("loc_latitude"),
 		    "location" => Input::get("loc_location"),
 	    ));
+		
+		$file_path = "/uploads/" . str_random(3) . ".jpg";
+		
+		Session::put("file_path", $file_path);
 		
 		$report = Report::create(array(
 		    'report_Desc' => Input::get("report_Desc"),
@@ -45,36 +52,25 @@ class ReportController extends BaseController {
 		    "location_id" => $location->id
 	    ));
 		
-		$this->postToTwitter(URL::route("report-details", array(
-				"id" => $report->id;
-			)
-		));
-		
 		
 		
 		$file = FileCustom::create(array(
-			"size" => $_FILES['file_image']['size'],
-			"real_name" =>  $_FILES['file_image']['name'],
-			"uploaded_name" => $_FILES['file_image']['name'],
-			"path" => $relative_path,
-			"type" => "image",
+			"path" => $file_path,
 			"report_id" => $report->id
 		));
 		
-		return;
+		$text = urlencode(Input::get("report_Desc"));
+		$url = urlencode(URL::route('report-details', array('id' => $report->id)));
 		
-		$file = FileCustom::createFile(Input::file("file_image"), "image", array("report_id" => $report->id));
 		
-		$relative_path = "/public/uploads/" . $_FILES['file_image']['name'];
-		
-		$full_path = base_path() . "/public/uploads/" . $_FILES['file_image']['name'];
+		return Redirect::away("http://shoftakapp.eu1.frbit.net/submit?text=$text&url=$url");
 		
 		
 		
 		
 	}
 	
-	public function postToTwitter($url) {
+	public function postToTwitter($desription, $report_url) {
 		$settings = array(
 			'oauth_access_token' => "2344979191-jftihe71X1Ls4uveYEiLpEFxTHidCJh1n3QhXl1",
       		'oauth_access_token_secret' => "rWFgwYIJQS4cxvICKvcSEovMw3pqIyePuIwRIlZ493eaI",
@@ -85,16 +81,14 @@ class ReportController extends BaseController {
     	$url = 'https://api.twitter.com/1.1/statuses/update.json';
     	$requestMethod = 'POST';
     	$postfields = array(
-    		'status' => $this->tweet(Input::get("report_Desc"), $url)
+    		'status' => $this->tweet($desription, $report_url)
     	);
     
     	$twitter = new TwitterAPIExchange($settings);
 
-		echo $twitter->buildOauth($url, $requestMethod)
+		return $twitter->buildOauth($url, $requestMethod)
              ->setPostfields($postfields)
              ->performRequest();
-             
-        return Response::json(array('test' => 'twitter'));
 	}
 	
 	public function tweet($input, $link) {

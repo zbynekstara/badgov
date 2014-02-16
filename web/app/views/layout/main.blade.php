@@ -11,13 +11,17 @@
 		<meta name="description" content="">
 		<meta name="author" content="lenovo">
 
-		<meta name="viewport" content="width=device-width; initial-scale=1.0">
-
+		<!-- <meta name="viewport" content="width=device-width; initial-scale=1.0"> -->
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+		@yield("js")
+		
 		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
 		<link rel="shortcut icon" href="/favicon.ico">
 		<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 		
 		<link rel="stylesheet" href="{{URL::route('home')}}/css/main.css" />
+		@yield("css")
+		
 	</head>
 
 	<body>
@@ -28,7 +32,7 @@
 
 			<div class="container">
 				<div class="row">
-					<div class="col-xs-7">
+					<div class="col-xs-12">
 						@yield("content")
 					</div>
 					
@@ -42,5 +46,7 @@
 				</p>
 			</footer>
 		</div>
+		
+		
 	</body>
 </html>

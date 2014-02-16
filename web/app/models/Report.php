@@ -7,5 +7,13 @@ class Report extends Eloquent {
 	//array of fields which can be filled
 	protected $fillable = array("report_Desc", "report_type", "Date_Time", "fake_counter", "location_id");
 	
+	public function location() {
+		return $this->belongsTo("Location");
+	}
+	
+	public function image() {
+		return $this->hasOne("FileCustom");
+	}
+	
 	
 }

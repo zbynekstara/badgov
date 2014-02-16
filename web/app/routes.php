@@ -28,16 +28,16 @@ Route::post("/submit", array(
 	"uses" => "ReportController@postReport"	
 ));
 
-Route::get("/image", array(
-	"as" => "report-image",
-	"uses" => "ReportController@showImage"	
+Route::post("/submitphoto", array(
+	"as" => "report-submit-photo-post",
+	"uses" => "ReportController@postReportPhoto"	
 ));
-
-Route::get('/', function()
-{
-	return View::make('hello');
-});
 
 Route::get('/test_json', 'TestDataController@getTestData');
 
 Route::get('/test_twitter', 'TestDataController@getTwitterTest');
+
+Route::get("/report/{id}", array(
+	"as" => "report-details",
+	"uses" => "ReportController@getReport"
+));
