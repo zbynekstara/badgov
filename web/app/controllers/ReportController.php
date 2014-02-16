@@ -2,6 +2,23 @@
 
 class ReportController extends BaseController {
 	
+	public function getStatistics() {
+		$reportCount = DB::table("reports")
+			->count();
+			
+		$lastRecord = DB::table("reports")
+			->order_by("id", "desc")
+			->first();
+
+		$locationCount = DB::table("reports")
+			->where("location", "=", $lastRecord->location_id)
+			->count();
+		
+		return Response::json(array(
+			'reportCount' => $reportCount,
+			'locationCount' => $locationCount
+		));
+	}
 	
 	public function getNewReportPage() {
 		
@@ -98,9 +115,14 @@ class ReportController extends BaseController {
 	}
 	
 	public function shorten($originalString) {
-		// length is 140-22-3-1-1 = 113
-		$newString = substr($originalString, 0, 113);
-		$newString .= "...";
+		// length is 140-22-(3)-1-1 = 113 (116)
+		$newString = "";
+		if (strlen($originalString) > 116) {
+			$newString = substr($originalString, 0, 113);
+			$newString .= "...";
+		} else {
+			$newString = $originalString;
+		}
 		return $newString;
 	}
 }
